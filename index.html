@@ -4,817 +4,1025 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Study with Saffrony</title>
+    <title>Study With Saffrony | Engineering Student Dashboard</title>
 
-    <link rel="stylesheet" href="style.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
+    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+    <!-- Font Awesome -->
     <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- MOBILE OVERLAY -->
-    <div class="overlay" id="overlay"></div>
+    <!-- ================= LOGIN / SIGNUP ================= -->
 
+    <div class="auth-page" id="authPage">
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar" id="sidebar">
+        <div class="auth-box">
 
-        <div class="brand">
-            <div class="brand-icon">
-                <i class="fa-solid fa-graduation-cap"></i>
+            <div class="auth-logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+
+                <h1>Study With <span>Saffrony</span></h1>
+
+                <p>Engineering Student Productivity Platform</p>
             </div>
 
-            <div class="brand-text">
-                <h2>Study with</h2>
-                <span>Saffrony</span>
-            </div>
-        </div>
+            <!-- LOGIN -->
 
+            <div class="auth-form" id="loginForm">
 
-        <div class="menu-label">MAIN MENU</div>
+                <h2>Welcome Back 👋</h2>
 
-        <nav class="nav-menu">
+                <input type="email"
+                    id="loginEmail"
+                    placeholder="Enter your email">
 
-            <button class="nav-item active" data-page="home">
-                <i class="fa-solid fa-house"></i>
-                <span>Home</span>
-            </button>
+                <input type="password"
+                    id="loginPassword"
+                    placeholder="Enter your password">
 
-            <button class="nav-item" data-page="notes">
-                <i class="fa-solid fa-book-open"></i>
-                <span>My Notes</span>
-            </button>
-
-            <button class="nav-item" data-page="quiz">
-                <i class="fa-solid fa-brain"></i>
-                <span>Quiz Zone</span>
-            </button>
-
-            <button class="nav-item" data-page="timetable">
-                <i class="fa-solid fa-calendar-days"></i>
-                <span>Time Table</span>
-            </button>
-
-            <button class="nav-item" data-page="calculator">
-                <i class="fa-solid fa-calculator"></i>
-                <span>Calculator</span>
-            </button>
-
-            <button class="nav-item" data-page="profile">
-                <i class="fa-solid fa-user"></i>
-                <span>My Profile</span>
-            </button>
-
-        </nav>
-
-
-        <div class="sidebar-bottom">
-
-            <div class="focus-card">
-                <div class="focus-emoji">🔥</div>
-
-                <div>
-                    <h4>Keep Going!</h4>
-                    <p>Small steps every day.</p>
-                </div>
-            </div>
-
-        </div>
-
-    </aside>
-
-
-    <!-- MAIN -->
-    <main class="main-content">
-
-        <!-- MOBILE HEADER -->
-        <header class="mobile-header">
-
-            <div class="mobile-brand">
-                🎓 Saffrony
-            </div>
-
-            <button id="menuToggle">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-
-        </header>
-
-
-        <!-- ================= HOME ================= -->
-        <section class="page active-page" id="home">
-
-            <div class="topbar">
-
-                <div>
-                    <p class="greeting">✨ Welcome back, Learner!</p>
-                    <h1>Make today <span>productive.</span></h1>
-                    <p class="description">
-                        Learn smarter, stay organized and achieve your goals.
-                    </p>
-                </div>
-
-                <div class="top-actions">
-                    <button class="icon-btn">
-                        <i class="fa-solid fa-bell"></i>
-                    </button>
-
-                    <div class="user-avatar">S</div>
-                </div>
-
-            </div>
-
-
-            <!-- HERO BANNER -->
-            <div class="hero-banner">
-
-                <div class="hero-content">
-                    <span class="hero-tag">STAY FOCUSED 🚀</span>
-
-                    <h2>Every expert was once a beginner.</h2>
-
-                    <p>
-                        Your future is created by what you do today.
-                        Keep learning and never stop growing.
-                    </p>
-
-                    <button class="hero-btn" data-go="notes">
-                        Start Learning
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                </div>
-
-                <div class="hero-art">
-                    <div class="floating-book">📚</div>
-                    <div class="floating-star star-one">⭐</div>
-                    <div class="floating-star star-two">✨</div>
-                    <div class="student-emoji">👩‍💻</div>
-                </div>
-
-            </div>
-
-
-            <!-- STATS -->
-            <div class="stats-grid">
-
-                <div class="stat-card purple-card">
-                    <div class="stat-icon">
-                        <i class="fa-solid fa-note-sticky"></i>
-                    </div>
-
-                    <div>
-                        <p>Total Notes</p>
-                        <h2 id="notesCount">0</h2>
-                        <small>Keep learning!</small>
-                    </div>
-                </div>
-
-
-                <div class="stat-card pink-card">
-                    <div class="stat-icon">
-                        <i class="fa-solid fa-trophy"></i>
-                    </div>
-
-                    <div>
-                        <p>Best Quiz Score</p>
-                        <h2 id="quizScore">0/5</h2>
-                        <small>Challenge yourself!</small>
-                    </div>
-                </div>
-
-
-                <div class="stat-card blue-card">
-                    <div class="stat-icon">
-                        <i class="fa-solid fa-clock"></i>
-                    </div>
-
-                    <div>
-                        <p>Study Time</p>
-                        <h2>12h</h2>
-                        <small>This week</small>
-                    </div>
-                </div>
-
-
-                <div class="stat-card orange-card">
-                    <div class="stat-icon">
-                        <i class="fa-solid fa-fire"></i>
-                    </div>
-
-                    <div>
-                        <p>Study Streak</p>
-                        <h2>5 Days</h2>
-                        <small>Keep it alive!</small>
-                    </div>
-                </div>
-
-            </div>
-
-
-            <!-- HOME GRID -->
-            <div class="home-grid">
-
-                <!-- TASKS -->
-                <div class="content-card tasks-card">
-
-                    <div class="card-heading">
-                        <div>
-                            <p class="small-label">YOUR PLAN</p>
-                            <h2>Today's Tasks</h2>
-                        </div>
-
-                        <span class="heading-emoji">📌</span>
-                    </div>
-
-
-                    <div class="task-list">
-
-                        <label class="task-item">
-
-                            <input type="checkbox">
-
-                            <span class="custom-check"></span>
-
-                            <div>
-                                <h4>Complete Mathematics Chapter</h4>
-                                <p>Algebra • 10:00 AM</p>
-                            </div>
-
-                            <span class="task-dot purple-dot"></span>
-
-                        </label>
-
-
-                        <label class="task-item">
-
-                            <input type="checkbox">
-
-                            <span class="custom-check"></span>
-
-                            <div>
-                                <h4>Revise Physics Notes</h4>
-                                <p>Mechanics • 1:00 PM</p>
-                            </div>
-
-                            <span class="task-dot blue-dot"></span>
-
-                        </label>
-
-
-                        <label class="task-item">
-
-                            <input type="checkbox">
-
-                            <span class="custom-check"></span>
-
-                            <div>
-                                <h4>Take Science Quiz</h4>
-                                <p>General Science • 5:00 PM</p>
-                            </div>
-
-                            <span class="task-dot pink-dot"></span>
-
-                        </label>
-
-                    </div>
-
-                </div>
-
-
-                <!-- PROGRESS -->
-                <div class="content-card progress-card">
-
-                    <div class="card-heading">
-
-                        <div>
-                            <p class="small-label">THIS WEEK</p>
-                            <h2>Study Progress</h2>
-                        </div>
-
-                        <span class="heading-emoji">📈</span>
-
-                    </div>
-
-
-                    <div class="progress-group">
-
-                        <div class="progress-row">
-                            <div class="progress-info">
-                                <span>Mathematics</span>
-                                <b>80%</b>
-                            </div>
-
-                            <div class="progress-track">
-                                <div class="progress-fill progress-purple"></div>
-                            </div>
-                        </div>
-
-
-                        <div class="progress-row">
-                            <div class="progress-info">
-                                <span>Science</span>
-                                <b>65%</b>
-                            </div>
-
-                            <div class="progress-track">
-                                <div class="progress-fill progress-blue"></div>
-                            </div>
-                        </div>
-
-
-                        <div class="progress-row">
-                            <div class="progress-info">
-                                <span>English</span>
-                                <b>90%</b>
-                            </div>
-
-                            <div class="progress-track">
-                                <div class="progress-fill progress-pink"></div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- QUOTE -->
-            <div class="quote-card">
-
-                <div class="quote-icon">💡</div>
-
-                <div>
-                    <p class="small-label">DAILY MOTIVATION</p>
-                    <h3>"Success is the sum of small efforts repeated day in and day out."</h3>
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- ================= NOTES ================= -->
-        <section class="page" id="notes">
-
-            <div class="page-title-row">
-
-                <div>
-                    <p class="greeting">📚 ORGANIZE YOUR KNOWLEDGE</p>
-                    <h1>My <span>Notes</span></h1>
-                    <p class="description">
-                        Save your important study notes in one place.
-                    </p>
-                </div>
-
-                <button class="primary-btn" id="openNoteModal">
-                    <i class="fa-solid fa-plus"></i>
-                    Add New Note
+                <button onclick="loginUser()" class="primary-btn">
+                    Login
                 </button>
 
-            </div>
-
-
-            <div class="notes-grid" id="notesContainer">
-                <!-- Notes added using JavaScript -->
-            </div>
-
-        </section>
-
-
-
-        <!-- ================= QUIZ ================= -->
-        <section class="page" id="quiz">
-
-            <div class="page-title-row">
-
-                <div>
-                    <p class="greeting">🧠 TEST YOUR KNOWLEDGE</p>
-                    <h1>Quiz <span>Zone</span></h1>
-                    <p class="description">
-                        Challenge yourself with quick questions.
-                    </p>
-                </div>
+                <p>
+                    Don't have an account?
+                    <span onclick="showSignup()">Create Account</span>
+                </p>
 
             </div>
 
 
-            <div class="quiz-wrapper">
+            <!-- SIGNUP -->
 
-                <!-- QUIZ START -->
-                <div class="quiz-screen" id="quizStart">
+            <div class="auth-form hidden" id="signupForm">
 
-                    <div class="quiz-big-icon">🧠</div>
+                <h2>Create Account 🚀</h2>
 
-                    <h2>Ready to Challenge Yourself?</h2>
+                <input type="text"
+                    id="signupName"
+                    placeholder="Enter your name">
 
-                    <p>
-                        Answer 5 questions and see how much you know!
-                    </p>
+                <input type="email"
+                    id="signupEmail"
+                    placeholder="Enter your email">
 
-                    <div class="quiz-features">
+                <input type="password"
+                    id="signupPassword"
+                    placeholder="Create password">
 
-                        <span>⚡ Quick</span>
-                        <span>🎯 Fun</span>
-                        <span>🏆 Score</span>
+                <button onclick="signupUser()" class="primary-btn">
+                    Create Account
+                </button>
 
-                    </div>
-
-                    <button class="primary-btn quiz-start-btn" id="startQuiz">
-                        Start Quiz
-                        <i class="fa-solid fa-play"></i>
-                    </button>
-
-                </div>
-
-
-                <!-- QUIZ QUESTIONS -->
-                <div class="quiz-screen hidden" id="quizBox">
-
-                    <div class="quiz-top">
-
-                        <span id="questionNumber">Question 1 of 5</span>
-
-                        <span class="score-live">
-                            Score: <b id="liveScore">0</b>
-                        </span>
-
-                    </div>
-
-                    <div class="quiz-progress">
-                        <div id="quizProgressFill"></div>
-                    </div>
-
-                    <h2 id="questionText"></h2>
-
-                    <div id="answerButtons" class="answers-grid"></div>
-
-                    <button class="primary-btn hidden" id="nextQuestion">
-                        Next Question
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-
-                </div>
-
-
-                <!-- RESULT -->
-                <div class="quiz-screen hidden" id="quizResult">
-
-                    <div class="result-trophy">🏆</div>
-
-                    <p class="small-label">QUIZ COMPLETED</p>
-
-                    <h2>Amazing Work!</h2>
-
-                    <div class="result-score" id="finalScore">
-                        0/5
-                    </div>
-
-                    <p id="resultMessage"></p>
-
-                    <button class="primary-btn quiz-start-btn" id="restartQuiz">
-                        Try Again
-                        <i class="fa-solid fa-rotate-right"></i>
-                    </button>
-
-                </div>
+                <p>
+                    Already have an account?
+                    <span onclick="showLogin()">Login</span>
+                </p>
 
             </div>
-
-        </section>
-
-
-
-        <!-- ================= TIMETABLE ================= -->
-        <section class="page" id="timetable">
-
-            <div class="page-title-row">
-
-                <div>
-                    <p class="greeting">📅 PLAN YOUR WEEK</p>
-                    <h1>Time <span>Table</span></h1>
-                    <p class="description">
-                        Stay organized and manage your study schedule.
-                    </p>
-                </div>
-
-            </div>
-
-
-            <div class="timetable-wrapper">
-
-                <table>
-
-                    <thead>
-                        <tr>
-                            <th>Time</th>
-                            <th>Monday</th>
-                            <th>Tuesday</th>
-                            <th>Wednesday</th>
-                            <th>Thursday</th>
-                            <th>Friday</th>
-                        </tr>
-                    </thead>
-
-
-                    <tbody>
-
-                        <tr>
-                            <td class="time-cell">9:00 AM</td>
-                            <td><span class="subject math">Mathematics</span></td>
-                            <td><span class="subject physics">Physics</span></td>
-                            <td><span class="subject english">English</span></td>
-                            <td><span class="subject math">Mathematics</span></td>
-                            <td><span class="subject chemistry">Chemistry</span></td>
-                        </tr>
-
-                        <tr>
-                            <td class="time-cell">11:00 AM</td>
-                            <td><span class="subject physics">Physics</span></td>
-                            <td><span class="subject english">English</span></td>
-                            <td><span class="subject math">Mathematics</span></td>
-                            <td><span class="subject biology">Biology</span></td>
-                            <td><span class="subject english">English</span></td>
-                        </tr>
-
-                        <tr>
-                            <td class="time-cell">1:00 PM</td>
-                            <td><span class="subject break">Lunch Break</span></td>
-                            <td><span class="subject break">Lunch Break</span></td>
-                            <td><span class="subject break">Lunch Break</span></td>
-                            <td><span class="subject break">Lunch Break</span></td>
-                            <td><span class="subject break">Lunch Break</span></td>
-                        </tr>
-
-                        <tr>
-                            <td class="time-cell">3:00 PM</td>
-                            <td><span class="subject english">English</span></td>
-                            <td><span class="subject math">Mathematics</span></td>
-                            <td><span class="subject chemistry">Chemistry</span></td>
-                            <td><span class="subject english">English</span></td>
-                            <td><span class="subject revision">Revision</span></td>
-                        </tr>
-
-                        <tr>
-                            <td class="time-cell">5:00 PM</td>
-                            <td><span class="subject revision">Revision</span></td>
-                            <td><span class="subject quiz-subject">Quiz</span></td>
-                            <td><span class="subject revision">Revision</span></td>
-                            <td><span class="subject quiz-subject">Quiz</span></td>
-                            <td><span class="subject test">Weekly Test</span></td>
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- ================= CALCULATOR ================= -->
-        <section class="page" id="calculator">
-
-            <div class="page-title-row">
-
-                <div>
-                    <p class="greeting">🧮 QUICK MATH TOOL</p>
-                    <h1>Smart <span>Calculator</span></h1>
-                    <p class="description">
-                        Solve your calculations quickly and easily.
-                    </p>
-                </div>
-
-            </div>
-
-
-            <div class="calculator-area">
-
-                <div class="calculator-card">
-
-                    <div class="calc-header">
-                        <span>SAFFRONY CALC</span>
-                        <span>●</span>
-                    </div>
-
-                    <input type="text" id="calcDisplay" placeholder="0" readonly>
-
-
-                    <div class="calculator-buttons">
-
-                        <button class="calc-btn clear" data-value="C">C</button>
-                        <button class="calc-btn operator" data-value="DEL">⌫</button>
-                        <button class="calc-btn operator" data-value="%">%</button>
-                        <button class="calc-btn operator" data-value="/">÷</button>
-
-                        <button class="calc-btn" data-value="7">7</button>
-                        <button class="calc-btn" data-value="8">8</button>
-                        <button class="calc-btn" data-value="9">9</button>
-                        <button class="calc-btn operator" data-value="*">×</button>
-
-                        <button class="calc-btn" data-value="4">4</button>
-                        <button class="calc-btn" data-value="5">5</button>
-                        <button class="calc-btn" data-value="6">6</button>
-                        <button class="calc-btn operator" data-value="-">−</button>
-
-                        <button class="calc-btn" data-value="1">1</button>
-                        <button class="calc-btn" data-value="2">2</button>
-                        <button class="calc-btn" data-value="3">3</button>
-                        <button class="calc-btn operator" data-value="+">+</button>
-
-                        <button class="calc-btn zero" data-value="0">0</button>
-                        <button class="calc-btn" data-value=".">.</button>
-                        <button class="calc-btn equal" data-value="=">=</button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- ================= PROFILE ================= -->
-        <section class="page" id="profile">
-
-            <div class="page-title-row">
-
-                <div>
-                    <p class="greeting">👤 YOUR LEARNING SPACE</p>
-                    <h1>My <span>Profile</span></h1>
-                    <p class="description">
-                        Track your learning journey and achievements.
-                    </p>
-                </div>
-
-            </div>
-
-
-            <div class="profile-layout">
-
-                <div class="profile-main-card">
-
-                    <div class="profile-cover"></div>
-
-                    <div class="profile-content">
-
-                        <div class="profile-avatar">S</div>
-
-                        <h2 id="profileName">Saffrony Student</h2>
-
-                        <p class="profile-email">
-                            student@saffrony.com
-                        </p>
-
-                        <span class="learner-badge">
-                            ✨ Active Learner
-                        </span>
-
-
-                        <div class="profile-stats">
-
-                            <div>
-                                <h3 id="profileNotes">0</h3>
-                                <p>Notes</p>
-                            </div>
-
-                            <div>
-                                <h3 id="profileScore">0</h3>
-                                <p>Best Score</p>
-                            </div>
-
-                            <div>
-                                <h3>5</h3>
-                                <p>Day Streak</p>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="achievement-card">
-
-                    <p class="small-label">ACHIEVEMENTS</p>
-
-                    <h2>Your Learning Journey 🏅</h2>
-
-                    <div class="achievement-list">
-
-                        <div class="achievement">
-                            <span class="achievement-icon purple-achieve">📚</span>
-
-                            <div>
-                                <h4>Knowledge Builder</h4>
-                                <p>Create your first note</p>
-                            </div>
-                        </div>
-
-
-                        <div class="achievement">
-                            <span class="achievement-icon pink-achieve">🧠</span>
-
-                            <div>
-                                <h4>Quiz Master</h4>
-                                <p>Score high in a quiz</p>
-                            </div>
-                        </div>
-
-
-                        <div class="achievement">
-                            <span class="achievement-icon orange-achieve">🔥</span>
-
-                            <div>
-                                <h4>Consistency Hero</h4>
-                                <p>Maintain your study streak</p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-
-    <!-- ADD NOTE MODAL -->
-    <div class="modal" id="noteModal">
-
-        <div class="modal-box">
-
-            <div class="modal-header">
-                <div>
-                    <p class="small-label">CREATE NOTE</p>
-                    <h2>New Study Note</h2>
-                </div>
-
-                <button id="closeNoteModal">×</button>
-            </div>
-
-
-            <div class="form-group">
-                <label>Note Title</label>
-
-                <input
-                    type="text"
-                    id="noteTitle"
-                    placeholder="Example: Newton's Laws"
-                >
-            </div>
-
-
-            <div class="form-group">
-                <label>Subject</label>
-
-                <select id="noteSubject">
-                    <option value="Mathematics">Mathematics</option>
-                    <option value="Science">Science</option>
-                    <option value="Physics">Physics</option>
-                    <option value="Chemistry">Chemistry</option>
-                    <option value="English">English</option>
-                    <option value="General">General</option>
-                </select>
-            </div>
-
-
-            <div class="form-group">
-                <label>Your Notes</label>
-
-                <textarea
-                    id="noteContent"
-                    placeholder="Write something important..."
-                ></textarea>
-            </div>
-
-
-            <button class="primary-btn full-btn" id="saveNote">
-                <i class="fa-solid fa-floppy-disk"></i>
-                Save Note
-            </button>
 
         </div>
 
     </div>
+
+
+    <!-- ================= MAIN APP ================= -->
+
+    <div class="app hidden" id="app">
+
+        <!-- MOBILE HEADER -->
+
+        <div class="mobile-header">
+
+            <div class="mobile-logo">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <span>Saffrony</span>
+            </div>
+
+            <button id="menuBtn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+        </div>
+
+
+        <!-- ================= SIDEBAR ================= -->
+
+        <aside class="sidebar" id="sidebar">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+
+                <div>
+                    <h2>Study With</h2>
+                    <span>Saffrony</span>
+                </div>
+
+            </div>
+
+
+            <nav>
+
+                <button class="nav-btn active"
+                    onclick="showSection('home', this)">
+
+                    <i class="fa-solid fa-house"></i>
+                    Home
+
+                </button>
+
+
+                <button class="nav-btn"
+                    onclick="showSection('notes', this)">
+
+                    <i class="fa-solid fa-book"></i>
+                    My Notes
+
+                </button>
+
+
+                <button class="nav-btn"
+                    onclick="showSection('quiz', this)">
+
+                    <i class="fa-solid fa-brain"></i>
+                    Quiz Zone
+
+                </button>
+
+
+                <button class="nav-btn"
+                    onclick="showSection('timetable', this)">
+
+                    <i class="fa-solid fa-calendar-days"></i>
+                    Time Table
+
+                </button>
+
+
+                <button class="nav-btn"
+                    onclick="showSection('timer', this)">
+
+                    <i class="fa-solid fa-clock"></i>
+                    Study Timer
+
+                </button>
+
+
+                <button class="nav-btn"
+                    onclick="showSection('calculator', this)">
+
+                    <i class="fa-solid fa-calculator"></i>
+                    Calculator
+
+                </button>
+
+
+                <button class="nav-btn"
+                    onclick="showSection('profile', this)">
+
+                    <i class="fa-solid fa-user"></i>
+                    My Profile
+
+                </button>
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+
+                <button onclick="logoutUser()" class="logout-btn">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- ================= MAIN CONTENT ================= -->
+
+        <main class="main-content">
+
+
+            <!-- ================= HOME ================= -->
+
+            <section id="home" class="page-section active-section">
+
+                <div class="top-header">
+
+                    <div>
+
+                        <p class="small-title">
+                            ENGINEERING STUDENT DASHBOARD
+                        </p>
+
+                        <h1>
+                            Hello, <span id="welcomeName">Student</span> 👋
+                        </h1>
+
+                        <p>
+                            Organize your studies and build your future.
+                        </p>
+
+                    </div>
+
+                    <div class="header-profile">
+
+                        <div class="profile-avatar"
+                            id="headerInitial">
+                            S
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STATS -->
+
+                <div class="stats-grid">
+
+                    <div class="stat-card purple">
+
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-book"></i>
+                        </div>
+
+                        <div>
+                            <h3 id="notesCount">0</h3>
+                            <p>Total Notes</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card blue">
+
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+
+                        <div>
+                            <h3 id="studySessions">0</h3>
+                            <p>Study Sessions</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card pink">
+
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+
+                        <div>
+                            <h3 id="quizScore">0%</h3>
+                            <p>Best Quiz Score</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card orange">
+
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-fire"></i>
+                        </div>
+
+                        <div>
+                            <h3 id="focusMinutes">0</h3>
+                            <p>Focus Minutes</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- QUICK ACTIONS -->
+
+                <div class="content-card">
+
+                    <div class="section-heading">
+
+                        <div>
+
+                            <p class="small-title">
+                                QUICK ACCESS
+                            </p>
+
+                            <h2>
+                                Study Tools
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="quick-grid">
+
+                        <div class="quick-card"
+                            onclick="quickNavigate('notes')">
+
+                            <i class="fa-solid fa-note-sticky"></i>
+
+                            <h3>Notes</h3>
+
+                            <p>
+                                Save your engineering notes.
+                            </p>
+
+                        </div>
+
+
+                        <div class="quick-card"
+                            onclick="quickNavigate('quiz')">
+
+                            <i class="fa-solid fa-brain"></i>
+
+                            <h3>Quiz</h3>
+
+                            <p>
+                                Test your engineering knowledge.
+                            </p>
+
+                        </div>
+
+
+                        <div class="quick-card"
+                            onclick="quickNavigate('timer')">
+
+                            <i class="fa-solid fa-hourglass-half"></i>
+
+                            <h3>Focus</h3>
+
+                            <p>
+                                Start a Pomodoro session.
+                            </p>
+
+                        </div>
+
+
+                        <div class="quick-card"
+                            onclick="quickNavigate('calculator')">
+
+                            <i class="fa-solid fa-calculator"></i>
+
+                            <h3>Calculator</h3>
+
+                            <p>
+                                Solve calculations quickly.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MOTIVATION -->
+
+                <div class="quote-card">
+
+                    <i class="fa-solid fa-quote-left"></i>
+
+                    <div>
+
+                        <h2>
+                            Engineering is not just about solving problems.
+                        </h2>
+
+                        <p>
+                            It's about creating solutions that change the world.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= NOTES ================= -->
+
+            <section id="notes" class="page-section">
+
+                <div class="page-title">
+
+                    <div>
+
+                        <p class="small-title">
+                            KNOWLEDGE MANAGEMENT
+                        </p>
+
+                        <h1>My Engineering Notes 📚</h1>
+
+                        <p>
+                            Store important concepts and study material.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="add-note-card">
+
+                    <h2>Add New Note</h2>
+
+                    <input
+                        type="text"
+                        id="noteTitle"
+                        placeholder="Note Title (Example: Data Structures)">
+
+                    <textarea
+                        id="noteContent"
+                        placeholder="Write your note here..."></textarea>
+
+                    <button
+                        onclick="addNote()"
+                        class="primary-btn">
+
+                        <i class="fa-solid fa-plus"></i>
+                        Add Note
+
+                    </button>
+
+                </div>
+
+
+                <div class="notes-container"
+                    id="notesContainer">
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= QUIZ ================= -->
+
+            <section id="quiz" class="page-section">
+
+                <div class="page-title">
+
+                    <p class="small-title">
+                        ENGINEERING QUIZ
+                    </p>
+
+                    <h1>Quiz Zone 🧠</h1>
+
+                    <p>
+                        Test your programming and engineering knowledge.
+                    </p>
+
+                </div>
+
+
+                <div class="quiz-card">
+
+                    <div id="quizContent">
+
+                        <div class="quiz-start">
+
+                            <i class="fa-solid fa-brain"></i>
+
+                            <h2>
+                                Ready to Test Yourself?
+                            </h2>
+
+                            <p>
+                                Answer engineering-related questions and check your score.
+                            </p>
+
+                            <button
+                                class="primary-btn"
+                                onclick="startQuiz()">
+
+                                Start Quiz 🚀
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= TIMETABLE ================= -->
+
+            <section id="timetable" class="page-section">
+
+                <div class="page-title">
+
+                    <p class="small-title">
+                        STUDY PLANNING
+                    </p>
+
+                    <h1>Engineering Time Table 📅</h1>
+
+                    <p>
+                        Plan your subjects and manage your weekly schedule.
+                    </p>
+
+                </div>
+
+
+                <div class="timetable-card">
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>Day</th>
+                                    <th>9 AM - 11 AM</th>
+                                    <th>11 AM - 1 PM</th>
+                                    <th>2 PM - 4 PM</th>
+                                    <th>4 PM - 6 PM</th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="timetableBody">
+
+                                <tr>
+
+                                    <td>Monday</td>
+
+                                    <td contenteditable="true">
+                                        Mathematics
+                                    </td>
+
+                                    <td contenteditable="true">
+                                        Programming
+                                    </td>
+
+                                    <td contenteditable="true">
+                                        Data Structures
+                                    </td>
+
+                                    <td contenteditable="true">
+                                        Revision
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>Tuesday</td>
+
+                                    <td contenteditable="true">
+                                        Physics
+                                    </td>
+
+                                    <td contenteditable="true">
+                                        DBMS
+                                    </td>
+
+                                    <td contenteditable="true">
+                                        Algorithms
+                                    </td>
+
+                                    <td contenteditable="true">
+                                        Practice
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>Wednesday</td>
+
+                                    <td contenteditable="true">
+                                        Electronics
+                                    </td>
+
+                                    <td contenteditable="true">
+                                        Programming
+                                    </td>
+
+                                    <td contenteditable="true">
+                                        OS
+                                    </td>
+
+                                    <td contenteditable="true">
+                                        Revision
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>Thursday</td>
+
+                                    <td contenteditable="true">
+                                        Mathematics
+                                    </td>
+
+                                    <td contenteditable="true">
+                                        DBMS
+                                    </td>
+
+                                    <td contenteditable="true">
+                                        Computer Networks
+                                    </td>
+
+                                    <td contenteditable="true">
+                                        Practice
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>Friday</td>
+
+                                    <td contenteditable="true">
+                                        Programming
+                                    </td>
+
+                                    <td contenteditable="true">
+                                        Algorithms
+                                    </td>
+
+                                    <td contenteditable="true">
+                                        Project Work
+                                    </td>
+
+                                    <td contenteditable="true">
+                                        Revision
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+
+                    <button
+                        class="primary-btn"
+                        onclick="saveTimetable()">
+
+                        <i class="fa-solid fa-floppy-disk"></i>
+
+                        Save Time Table
+
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= TIMER ================= -->
+
+            <section id="timer" class="page-section">
+
+                <div class="page-title">
+
+                    <p class="small-title">
+                        PRODUCTIVITY
+                    </p>
+
+                    <h1>Pomodoro Study Timer ⏱️</h1>
+
+                    <p>
+                        Focus deeply. Take breaks. Study smarter.
+                    </p>
+
+                </div>
+
+
+                <div class="timer-card">
+
+                    <div class="timer-modes">
+
+                        <button
+                            class="timer-mode active-mode"
+                            onclick="setTimerMode('focus')">
+
+                            Focus
+
+                        </button>
+
+                        <button
+                            class="timer-mode"
+                            onclick="setTimerMode('short')">
+
+                            Short Break
+
+                        </button>
+
+                        <button
+                            class="timer-mode"
+                            onclick="setTimerMode('long')">
+
+                            Long Break
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="timer-circle">
+
+                        <div>
+
+                            <span id="timerDisplay">
+                                25:00
+                            </span>
+
+                            <p id="timerLabel">
+                                Focus Time
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="timer-controls">
+
+                        <button
+                            class="timer-control"
+                            onclick="startTimer()">
+
+                            <i class="fa-solid fa-play"></i>
+
+                        </button>
+
+
+                        <button
+                            class="timer-control"
+                            onclick="pauseTimer()">
+
+                            <i class="fa-solid fa-pause"></i>
+
+                        </button>
+
+
+                        <button
+                            class="timer-control"
+                            onclick="resetTimer()">
+
+                            <i class="fa-solid fa-rotate-right"></i>
+
+                        </button>
+
+                    </div>
+
+
+                    <p class="session-text">
+
+                        Completed Focus Sessions:
+                        <strong id="completedSessions">
+                            0
+                        </strong>
+
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= CALCULATOR ================= -->
+
+            <section id="calculator" class="page-section">
+
+                <div class="page-title">
+
+                    <p class="small-title">
+                        ENGINEERING TOOL
+                    </p>
+
+                    <h1>Calculator 🧮</h1>
+
+                    <p>
+                        Quick calculations for your studies.
+                    </p>
+
+                </div>
+
+
+                <div class="calculator">
+
+                    <input
+                        type="text"
+                        id="calcDisplay"
+                        readonly
+                        placeholder="0">
+
+
+                    <div class="calc-buttons">
+
+                        <button onclick="clearCalculator()" class="operator">
+                            C
+                        </button>
+
+                        <button onclick="deleteLast()" class="operator">
+                            DEL
+                        </button>
+
+                        <button onclick="appendCalc('%')" class="operator">
+                            %
+                        </button>
+
+                        <button onclick="appendCalc('/')" class="operator">
+                            ÷
+                        </button>
+
+
+                        <button onclick="appendCalc('7')">7</button>
+                        <button onclick="appendCalc('8')">8</button>
+                        <button onclick="appendCalc('9')">9</button>
+
+                        <button onclick="appendCalc('*')" class="operator">
+                            ×
+                        </button>
+
+
+                        <button onclick="appendCalc('4')">4</button>
+                        <button onclick="appendCalc('5')">5</button>
+                        <button onclick="appendCalc('6')">6</button>
+
+                        <button onclick="appendCalc('-')" class="operator">
+                            −
+                        </button>
+
+
+                        <button onclick="appendCalc('1')">1</button>
+                        <button onclick="appendCalc('2')">2</button>
+                        <button onclick="appendCalc('3')">3</button>
+
+                        <button onclick="appendCalc('+')" class="operator">
+                            +
+                        </button>
+
+
+                        <button onclick="appendCalc('0')" class="zero">
+                            0
+                        </button>
+
+                        <button onclick="appendCalc('.')">
+                            .
+                        </button>
+
+                        <button onclick="calculateResult()" class="equals">
+                            =
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= PROFILE ================= -->
+
+            <section id="profile" class="page-section">
+
+                <div class="page-title">
+
+                    <p class="small-title">
+                        USER ACCOUNT
+                    </p>
+
+                    <h1>My Profile 👨‍💻</h1>
+
+                    <p>
+                        Manage your student profile.
+                    </p>
+
+                </div>
+
+
+                <div class="profile-card">
+
+                    <div class="big-avatar"
+                        id="profileInitial">
+
+                        S
+
+                    </div>
+
+
+                    <div class="profile-form">
+
+                        <label>
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="profileName">
+
+
+                        <label>
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="profileEmail"
+                            readonly>
+
+
+                        <label>
+                            Engineering Branch
+                        </label>
+
+                        <select id="profileBranch">
+
+                            <option>
+                                Computer Science Engineering
+                            </option>
+
+                            <option>
+                                Information Technology
+                            </option>
+
+                            <option>
+                                Mechanical Engineering
+                            </option>
+
+                            <option>
+                                Civil Engineering
+                            </option>
+
+                            <option>
+                                Electrical Engineering
+                            </option>
+
+                            <option>
+                                Electronics Engineering
+                            </option>
+
+                            <option>
+                                Other
+                            </option>
+
+                        </select>
+
+
+                        <button
+                            class="primary-btn"
+                            onclick="saveProfile()">
+
+                            <i class="fa-solid fa-floppy-disk"></i>
+
+                            Save Profile
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+    <!-- TOAST -->
+
+    <div id="toast"></div>
 
 
     <script src="script.js"></script>

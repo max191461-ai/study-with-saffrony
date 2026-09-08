@@ -1,141 +1,560 @@
-// ===============================
-// PAGE NAVIGATION
-// ===============================
+/* =====================================================
+   STUDY WITH SAFFRONY
+   ENGINEERING STUDENT PRODUCTIVITY APP
+===================================================== */
 
-const navItems = document.querySelectorAll(".nav-item");
-const pages = document.querySelectorAll(".page");
 
-function openPage(pageId) {
+/* ================= GLOBAL VARIABLES ================= */
 
-    pages.forEach(page => {
-        page.classList.remove("active-page");
-    });
+let currentUser = null;
 
-    navItems.forEach(item => {
-        item.classList.remove("active");
-    });
+let notes = [];
 
-    document.getElementById(pageId).classList.add("active-page");
+let quizQuestions = [
+    {
+        question: "What does CPU stand for?",
+        options: [
+            "Central Processing Unit",
+            "Computer Personal Unit",
+            "Central Program Unit",
+            "Control Processing Unit"
+        ],
+        answer: 0
+    },
+
+    {
+        question: "Which language is primarily used for web page structure?",
+        options: [
+            "CSS",
+            "HTML",
+            "Python",
+            "Java"
+        ],
+        answer: 1
+    },
+
+    {
+        question: "What is the full form of DBMS?",
+        options: [
+            "Database Management System",
+            "Data Backup Management System",
+            "Digital Binary Management System",
+            "Database Machine System"
+        ],
+        answer: 0
+    },
+
+    {
+        question: "Which data structure follows LIFO?",
+        options: [
+            "Queue",
+            "Array",
+            "Stack",
+            "Linked List"
+        ],
+        answer: 2
+    },
+
+    {
+        question: "What does RAM stand for?",
+        options: [
+            "Random Access Memory",
+            "Read Access Memory",
+            "Rapid Application Memory",
+            "Run Access Module"
+        ],
+        answer: 0
+    },
+
+    {
+        question: "Which of these is an operating system?",
+        options: [
+            "HTML",
+            "Windows",
+            "MySQL",
+            "JavaScript"
+        ],
+        answer: 1
+    },
+
+    {
+        question: "Which symbol is used for comments in JavaScript?",
+        options: [
+            "//",
+            "<!-- -->",
+            "#",
+            "**"
+        ],
+        answer: 0
+    }
+];
+
+
+let currentQuestion = 0;
+let quizAnswers = [];
+
+
+/* ================= INITIALIZE APP ================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    checkLogin();
+
+    loadNotes();
+
+    loadProfile();
+
+    loadTimetable();
+
+    updateDashboard();
 
     document
-        .querySelector(`[data-page="${pageId}"]`)
-        .classList.add("active");
+        .getElementById("menuBtn")
+        ?.addEventListener("click", toggleSidebar);
 
-    sidebar.classList.remove("show");
-    overlay.classList.remove("show");
+});
+
+
+/* =====================================================
+   AUTHENTICATION
+===================================================== */
+
+
+/* SHOW SIGNUP */
+
+function showSignup() {
+
+    document
+        .getElementById("loginForm")
+        .classList.add("hidden");
+
+    document
+        .getElementById("signupForm")
+        .classList.remove("hidden");
+
+}
+
+
+/* SHOW LOGIN */
+
+function showLogin() {
+
+    document
+        .getElementById("signupForm")
+        .classList.add("hidden");
+
+    document
+        .getElementById("loginForm")
+        .classList.remove("hidden");
+
+}
+
+
+/* SIGNUP USER */
+
+function signupUser() {
+
+    const name =
+        document
+            .getElementById("signupName")
+            .value
+            .trim();
+
+    const email =
+        document
+            .getElementById("signupEmail")
+            .value
+            .trim();
+
+    const password =
+        document
+            .getElementById("signupPassword")
+            .value
+            .trim();
+
+
+    if (!name || !email || !password) {
+
+        showToast(
+            "Please fill all fields!"
+        );
+
+        return;
+
+    }
+
+
+    if (!email.includes("@")) {
+
+        showToast(
+            "Enter a valid email!"
+        );
+
+        return;
+
+    }
+
+
+    const user = {
+
+        name: name,
+
+        email: email,
+
+        password: password,
+
+        branch:
+            "Computer Science Engineering"
+
+    };
+
+
+    localStorage.setItem(
+        "saffronyUser",
+        JSON.stringify(user)
+    );
+
+
+    currentUser = user;
+
+
+    localStorage.setItem(
+        "saffronyLoggedIn",
+        "true"
+    );
+
+
+    showToast(
+        "Account created successfully!"
+    );
+
+
+    setTimeout(function () {
+
+        openApp();
+
+    }, 600);
+
+}
+
+
+/* LOGIN USER */
+
+function loginUser() {
+
+    const email =
+        document
+            .getElementById("loginEmail")
+            .value
+            .trim();
+
+    const password =
+        document
+            .getElementById("loginPassword")
+            .value
+            .trim();
+
+
+    const savedUser =
+        JSON.parse(
+            localStorage.getItem("saffronyUser")
+        );
+
+
+    if (!savedUser) {
+
+        showToast(
+            "Account not found. Please Sign Up!"
+        );
+
+        return;
+
+    }
+
+
+    if (
+        email === savedUser.email &&
+        password === savedUser.password
+    ) {
+
+        currentUser = savedUser;
+
+
+        localStorage.setItem(
+            "saffronyLoggedIn",
+            "true"
+        );
+
+
+        openApp();
+
+        showToast(
+            "Welcome back, " +
+            savedUser.name +
+            "!"
+        );
+
+    }
+
+    else {
+
+        showToast(
+            "Invalid email or password!"
+        );
+
+    }
+
+}
+
+
+/* CHECK LOGIN */
+
+function checkLogin() {
+
+    const loggedIn =
+        localStorage.getItem(
+            "saffronyLoggedIn"
+        );
+
+
+    const savedUser =
+        localStorage.getItem(
+            "saffronyUser"
+        );
+
+
+    if (
+        loggedIn === "true" &&
+        savedUser
+    ) {
+
+        currentUser =
+            JSON.parse(savedUser);
+
+        openApp();
+
+    }
+
+}
+
+
+/* OPEN APP */
+
+function openApp() {
+
+    document
+        .getElementById("authPage")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("app")
+        .classList.remove("hidden");
+
+
+    updateUserUI();
+
+    loadNotes();
+
+    loadProfile();
+
+    loadTimetable();
+
+    updateDashboard();
+
+}
+
+
+/* LOGOUT */
+
+function logoutUser() {
+
+    localStorage.removeItem(
+        "saffronyLoggedIn"
+    );
+
+
+    location.reload();
+
+}
+
+
+/* UPDATE USER UI */
+
+function updateUserUI() {
+
+    if (!currentUser) return;
+
+
+    document
+        .getElementById("welcomeName")
+        .textContent =
+        currentUser.name;
+
+
+    const initial =
+        currentUser.name
+            .charAt(0)
+            .toUpperCase();
+
+
+    document
+        .getElementById("headerInitial")
+        .textContent =
+        initial;
+
+
+    document
+        .getElementById("profileInitial")
+        .textContent =
+        initial;
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+
+function showSection(sectionId, button) {
+
+    const sections =
+        document.querySelectorAll(
+            ".page-section"
+        );
+
+
+    sections.forEach(function (section) {
+
+        section.classList.remove(
+            "active-section"
+        );
+
+    });
+
+
+    document
+        .getElementById(sectionId)
+        .classList.add(
+            "active-section"
+        );
+
+
+    const navButtons =
+        document.querySelectorAll(
+            ".nav-btn"
+        );
+
+
+    navButtons.forEach(function (btn) {
+
+        btn.classList.remove(
+            "active"
+        );
+
+    });
+
+
+    if (button) {
+
+        button.classList.add(
+            "active"
+        );
+
+    }
+
+
+    document
+        .getElementById("sidebar")
+        .classList.remove(
+            "show-sidebar"
+        );
+
 
     window.scrollTo({
         top: 0,
         behavior: "smooth"
     });
+
 }
 
-navItems.forEach(item => {
 
-    item.addEventListener("click", () => {
+/* QUICK NAVIGATION */
 
-        openPage(item.dataset.page);
+function quickNavigate(sectionId) {
+
+    const buttons =
+        document.querySelectorAll(
+            ".nav-btn"
+        );
+
+
+    buttons.forEach(function (button) {
+
+        if (
+            button.textContent
+                .toLowerCase()
+                .includes(
+                    sectionId === "timer"
+                        ? "study timer"
+                        : sectionId
+                )
+        ) {
+
+            showSection(
+                sectionId,
+                button
+            );
+
+        }
 
     });
 
-});
+}
 
 
-// ===============================
-// HERO BUTTON
-// ===============================
+/* MOBILE SIDEBAR */
 
-document.querySelectorAll("[data-go]").forEach(button => {
+function toggleSidebar() {
 
-    button.addEventListener("click", () => {
+    document
+        .getElementById("sidebar")
+        .classList.toggle(
+            "show-sidebar"
+        );
 
-        openPage(button.dataset.go);
-
-    });
-
-});
+}
 
 
-// ===============================
-// MOBILE MENU
-// ===============================
-
-const menuToggle = document.getElementById("menuToggle");
-const sidebar = document.getElementById("sidebar");
-const overlay = document.getElementById("overlay");
-
-menuToggle.addEventListener("click", () => {
-
-    sidebar.classList.toggle("show");
-    overlay.classList.toggle("show");
-
-});
-
-overlay.addEventListener("click", () => {
-
-    sidebar.classList.remove("show");
-    overlay.classList.remove("show");
-
-});
+/* =====================================================
+   NOTES SYSTEM
+===================================================== */
 
 
-// ===============================
-// NOTES SYSTEM
-// ===============================
+/* ADD NOTE */
 
-let notes = JSON.parse(
-    localStorage.getItem("saffronyNotes")
-) || [];
-
-
-const noteModal = document.getElementById("noteModal");
-const openNoteModal = document.getElementById("openNoteModal");
-const closeNoteModal = document.getElementById("closeNoteModal");
-const saveNote = document.getElementById("saveNote");
-
-
-openNoteModal.addEventListener("click", () => {
-
-    noteModal.classList.add("show");
-
-});
-
-
-closeNoteModal.addEventListener("click", () => {
-
-    noteModal.classList.remove("show");
-
-});
-
-
-noteModal.addEventListener("click", (event) => {
-
-    if (event.target === noteModal) {
-
-        noteModal.classList.remove("show");
-
-    }
-
-});
-
-
-// SAVE NOTE
-
-saveNote.addEventListener("click", () => {
+function addNote() {
 
     const title =
-        document.getElementById("noteTitle").value.trim();
+        document
+            .getElementById("noteTitle")
+            .value
+            .trim();
 
-    const subject =
-        document.getElementById("noteSubject").value;
 
     const content =
-        document.getElementById("noteContent").value.trim();
+        document
+            .getElementById("noteContent")
+            .value
+            .trim();
 
 
     if (!title || !content) {
 
-        alert("Please enter note title and content!");
+        showToast(
+            "Please enter title and note!"
+        );
 
         return;
 
@@ -146,16 +565,18 @@ saveNote.addEventListener("click", () => {
 
         id: Date.now(),
 
-        title,
+        title: title,
 
-        subject,
+        content: content,
 
-        content
+        date:
+            new Date()
+                .toLocaleDateString()
 
     };
 
 
-    notes.unshift(newNote);
+    notes.push(newNote);
 
 
     localStorage.setItem(
@@ -164,38 +585,73 @@ saveNote.addEventListener("click", () => {
     );
 
 
-    document.getElementById("noteTitle").value = "";
-    document.getElementById("noteContent").value = "";
+    document
+        .getElementById("noteTitle")
+        .value = "";
 
 
-    noteModal.classList.remove("show");
+    document
+        .getElementById("noteContent")
+        .value = "";
 
 
-    renderNotes();
+    displayNotes();
+
     updateDashboard();
 
-});
+    showToast(
+        "Note added successfully!"
+    );
+
+}
 
 
-function renderNotes() {
+/* LOAD NOTES */
+
+function loadNotes() {
+
+    const savedNotes =
+        localStorage.getItem(
+            "saffronyNotes"
+        );
+
+
+    if (savedNotes) {
+
+        notes =
+            JSON.parse(savedNotes);
+
+    }
+
+
+    displayNotes();
+
+}
+
+
+/* DISPLAY NOTES */
+
+function displayNotes() {
 
     const container =
-        document.getElementById("notesContainer");
+        document.getElementById(
+            "notesContainer"
+        );
 
 
-    container.innerHTML = "";
+    if (!container) return;
 
 
     if (notes.length === 0) {
 
         container.innerHTML = `
 
-            <div class="empty-notes">
+            <div class="note-card">
 
-                <h2>📚 No Notes Yet</h2>
+                <h3>No Notes Yet 📚</h3>
 
                 <p>
-                    Start organizing your knowledge by creating your first note.
+                    Start adding your engineering notes!
                 </p>
 
             </div>
@@ -207,58 +663,70 @@ function renderNotes() {
     }
 
 
-    notes.forEach(note => {
-
-        const card = document.createElement("div");
-
-        card.className = "note-card";
+    container.innerHTML = "";
 
 
-        card.innerHTML = `
+    notes
+        .slice()
+        .reverse()
+        .forEach(function (note) {
 
-            <button
-                class="delete-note"
-                data-id="${note.id}"
-            >
-                <i class="fa-solid fa-trash"></i>
-            </button>
-
-            <span class="note-subject">
-                ${escapeHTML(note.subject)}
-            </span>
-
-            <h3>
-                ${escapeHTML(note.title)}
-            </h3>
-
-            <p>
-                ${escapeHTML(note.content)}
-            </p>
-
-        `;
+            const card =
+                document.createElement("div");
 
 
-        container.appendChild(card);
+            card.className =
+                "note-card";
 
-    });
+
+            card.innerHTML = `
+
+                <h3>
+                    ${escapeHTML(note.title)}
+                </h3>
+
+                <p>
+                    ${escapeHTML(note.content)}
+                </p>
+
+                <div class="note-actions">
+
+                    <span class="note-date">
+
+                        ${note.date}
+
+                    </span>
+
+                    <button
+                        class="delete-note"
+                        onclick="deleteNote(${note.id})">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                    </button>
+
+                </div>
+
+            `;
 
 
-    document.querySelectorAll(".delete-note").forEach(button => {
-
-        button.addEventListener("click", () => {
-
-            deleteNote(Number(button.dataset.id));
+            container.appendChild(card);
 
         });
-
-    });
 
 }
 
 
+/* DELETE NOTE */
+
 function deleteNote(id) {
 
-    notes = notes.filter(note => note.id !== id);
+    notes =
+        notes.filter(function (note) {
+
+            return note.id !== id;
+
+        });
 
 
     localStorage.setItem(
@@ -267,314 +735,227 @@ function deleteNote(id) {
     );
 
 
-    renderNotes();
+    displayNotes();
+
     updateDashboard();
 
-}
-
-
-function escapeHTML(text) {
-
-    const div = document.createElement("div");
-
-    div.textContent = text;
-
-    return div.innerHTML;
+    showToast(
+        "Note deleted!"
+    );
 
 }
 
 
-// ===============================
-// QUIZ SYSTEM
-// ===============================
-
-const quizQuestions = [
-
-    {
-        question: "What is the capital of India?",
-
-        answers: [
-            "Mumbai",
-            "New Delhi",
-            "Kolkata",
-            "Chennai"
-        ],
-
-        correct: 1
-    },
-
-    {
-        question: "Which planet is known as the Red Planet?",
-
-        answers: [
-            "Earth",
-            "Mars",
-            "Venus",
-            "Jupiter"
-        ],
-
-        correct: 1
-    },
-
-    {
-        question: "What is 12 × 8?",
-
-        answers: [
-            "86",
-            "94",
-            "96",
-            "88"
-        ],
-
-        correct: 2
-    },
-
-    {
-        question: "Which gas do plants mainly absorb from the atmosphere?",
-
-        answers: [
-            "Oxygen",
-            "Carbon Dioxide",
-            "Nitrogen",
-            "Hydrogen"
-        ],
-
-        correct: 1
-    },
-
-    {
-        question: "Who wrote Romeo and Juliet?",
-
-        answers: [
-            "William Shakespeare",
-            "Charles Dickens",
-            "Mark Twain",
-            "J.K. Rowling"
-        ],
-
-        correct: 0
-    }
-
-];
+/* =====================================================
+   QUIZ SYSTEM
+===================================================== */
 
 
-let currentQuestion = 0;
-let currentScore = 0;
-let answered = false;
+/* START QUIZ */
 
-
-const quizStart =
-    document.getElementById("quizStart");
-
-const quizBox =
-    document.getElementById("quizBox");
-
-const quizResult =
-    document.getElementById("quizResult");
-
-const startQuiz =
-    document.getElementById("startQuiz");
-
-const questionText =
-    document.getElementById("questionText");
-
-const answerButtons =
-    document.getElementById("answerButtons");
-
-const nextQuestion =
-    document.getElementById("nextQuestion");
-
-
-startQuiz.addEventListener("click", () => {
+function startQuiz() {
 
     currentQuestion = 0;
-    currentScore = 0;
 
-    quizStart.classList.add("hidden");
-    quizResult.classList.add("hidden");
-
-    quizBox.classList.remove("hidden");
-
-    showQuestion();
-
-});
+    quizAnswers = [];
 
 
-function showQuestion() {
+    displayQuestion();
 
-    answered = false;
+}
 
-    nextQuestion.classList.add("hidden");
+
+/* DISPLAY QUESTION */
+
+function displayQuestion() {
+
+    const quizContent =
+        document.getElementById(
+            "quizContent"
+        );
+
 
     const question =
         quizQuestions[currentQuestion];
 
 
-    document.getElementById("questionNumber").textContent =
-        `Question ${currentQuestion + 1} of ${quizQuestions.length}`;
+    quizContent.innerHTML = `
+
+        <div class="question-number">
+
+            Question
+            ${currentQuestion + 1}
+            of
+            ${quizQuestions.length}
+
+        </div>
 
 
-    document.getElementById("liveScore").textContent =
-        currentScore;
+        <h2 class="question">
+
+            ${question.question}
+
+        </h2>
 
 
-    document.getElementById("quizProgressFill").style.width =
-        `${((currentQuestion + 1) / quizQuestions.length) * 100}%`;
+        <div class="options">
 
+            ${question.options
+                .map(function (
+                    option,
+                    index
+                ) {
 
-    questionText.textContent =
-        question.question;
+                    return `
 
+                        <button
+                            class="option"
+                            onclick="selectAnswer(${index})">
 
-    answerButtons.innerHTML = "";
+                            ${String.fromCharCode(65 + index)}.
+                            ${option}
 
+                        </button>
 
-    question.answers.forEach((answer, index) => {
+                    `;
 
-        const button = document.createElement("button");
+                })
+                .join("")
+            }
 
-        button.className = "answer-btn";
+        </div>
 
-        button.textContent = answer;
-
-
-        button.addEventListener("click", () => {
-
-            selectAnswer(index);
-
-        });
-
-
-        answerButtons.appendChild(button);
-
-    });
-
-}
-
-
-function selectAnswer(index) {
-
-    if (answered) return;
-
-    answered = true;
-
-
-    const correctAnswer =
-        quizQuestions[currentQuestion].correct;
-
-
-    const buttons =
-        document.querySelectorAll(".answer-btn");
-
-
-    buttons.forEach((button, buttonIndex) => {
-
-        button.disabled = true;
-
-
-        if (buttonIndex === correctAnswer) {
-
-            button.classList.add("correct");
-
-        }
-
-
-        if (
-            buttonIndex === index &&
-            index !== correctAnswer
-        ) {
-
-            button.classList.add("wrong");
-
-        }
-
-    });
-
-
-    if (index === correctAnswer) {
-
-        currentScore++;
-
-        document.getElementById("liveScore").textContent =
-            currentScore;
-
-    }
-
-
-    nextQuestion.classList.remove("hidden");
+    `;
 
 }
 
 
-nextQuestion.addEventListener("click", () => {
+/* SELECT ANSWER */
+
+function selectAnswer(answerIndex) {
+
+    quizAnswers.push(
+        answerIndex
+    );
+
 
     currentQuestion++;
 
 
-    if (currentQuestion < quizQuestions.length) {
+    if (
+        currentQuestion <
+        quizQuestions.length
+    ) {
 
-        showQuestion();
-
-    } else {
-
-        showQuizResult();
-
-    }
-
-});
-
-
-function showQuizResult() {
-
-    quizBox.classList.add("hidden");
-
-    quizResult.classList.remove("hidden");
-
-
-    document.getElementById("finalScore").textContent =
-        `${currentScore}/${quizQuestions.length}`;
-
-
-    const resultMessage =
-        document.getElementById("resultMessage");
-
-
-    if (currentScore === 5) {
-
-        resultMessage.textContent =
-            "Perfect score! You're absolutely amazing! 🌟";
-
-    }
-
-    else if (currentScore >= 3) {
-
-        resultMessage.textContent =
-            "Great job! Keep practicing and you'll become even better! 🚀";
+        displayQuestion();
 
     }
 
     else {
 
-        resultMessage.textContent =
-            "Good attempt! Learning is a journey, keep going! 💪";
+        showQuizResult();
 
     }
+
+}
+
+
+/* QUIZ RESULT */
+
+function showQuizResult() {
+
+    let score = 0;
+
+
+    quizAnswers.forEach(
+        function (
+            answer,
+            index
+        ) {
+
+            if (
+                answer ===
+                quizQuestions[index].answer
+            ) {
+
+                score++;
+
+            }
+
+        }
+    );
+
+
+    const percentage =
+        Math.round(
+            (score /
+                quizQuestions.length)
+            * 100
+        );
 
 
     const bestScore =
         Number(
-            localStorage.getItem("saffronyQuizScore")
+            localStorage.getItem(
+                "saffronyQuizScore"
+            )
         ) || 0;
 
 
-    if (currentScore > bestScore) {
+    if (
+        percentage > bestScore
+    ) {
 
         localStorage.setItem(
             "saffronyQuizScore",
-            currentScore
+            percentage
         );
 
     }
+
+
+    document
+        .getElementById(
+            "quizContent"
+        )
+        .innerHTML = `
+
+            <div class="result-box">
+
+                <p>
+                    Your Score
+                </p>
+
+                <h1>
+                    ${percentage}%
+                </h1>
+
+                <h2>
+                    ${score}
+                    /
+                    ${quizQuestions.length}
+                    Correct
+                </h2>
+
+                <p>
+                    ${
+                        percentage >= 70
+                        ? "Excellent! Keep learning 🚀"
+                        : "Keep practicing! You can improve 💪"
+                    }
+                </p>
+
+                <button
+                    class="primary-btn"
+                    onclick="startQuiz()">
+
+                    Try Again
+
+                </button>
+
+            </div>
+
+        `;
 
 
     updateDashboard();
@@ -582,91 +963,461 @@ function showQuizResult() {
 }
 
 
-document
-    .getElementById("restartQuiz")
-    .addEventListener("click", () => {
+/* =====================================================
+   TIMETABLE
+===================================================== */
 
-        quizResult.classList.add("hidden");
 
-        quizStart.classList.remove("hidden");
+/* SAVE TIMETABLE */
+
+function saveTimetable() {
+
+    const rows =
+        document.querySelectorAll(
+            "#timetableBody tr"
+        );
+
+
+    let timetable = [];
+
+
+    rows.forEach(function (row) {
+
+        let rowData = [];
+
+
+        const cells =
+            row.querySelectorAll("td");
+
+
+        cells.forEach(function (cell) {
+
+            rowData.push(
+                cell.innerText
+            );
+
+        });
+
+
+        timetable.push(rowData);
+
+    });
+
+
+    localStorage.setItem(
+        "saffronyTimetable",
+        JSON.stringify(timetable)
+    );
+
+
+    showToast(
+        "Time Table saved successfully!"
+    );
+
+}
+
+
+/* LOAD TIMETABLE */
+
+function loadTimetable() {
+
+    const saved =
+        localStorage.getItem(
+            "saffronyTimetable"
+        );
+
+
+    if (!saved) return;
+
+
+    const timetable =
+        JSON.parse(saved);
+
+
+    const rows =
+        document.querySelectorAll(
+            "#timetableBody tr"
+        );
+
+
+    rows.forEach(
+        function (
+            row,
+            rowIndex
+        ) {
+
+            const cells =
+                row.querySelectorAll("td");
+
+
+            cells.forEach(
+                function (
+                    cell,
+                    cellIndex
+                ) {
+
+                    if (
+                        timetable[rowIndex] &&
+                        timetable[rowIndex][cellIndex]
+                    ) {
+
+                        cell.innerText =
+                            timetable[rowIndex][cellIndex];
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   POMODORO TIMER
+===================================================== */
+
+
+let timer;
+
+let timeLeft = 25 * 60;
+
+let currentMode = "focus";
+
+let timerRunning = false;
+
+
+/* SET TIMER MODE */
+
+function setTimerMode(mode) {
+
+    pauseTimer();
+
+
+    currentMode = mode;
+
+
+    const modes =
+        document.querySelectorAll(
+            ".timer-mode"
+        );
+
+
+    modes.forEach(function (button) {
+
+        button.classList.remove(
+            "active-mode"
+        );
 
     });
 
 
-// ===============================
-// CALCULATOR
-// ===============================
+    if (mode === "focus") {
 
-const calcDisplay =
-    document.getElementById("calcDisplay");
+        timeLeft = 25 * 60;
 
-const calcButtons =
-    document.querySelectorAll(".calc-btn");
-
-
-calcButtons.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        const value =
-            button.dataset.value;
+        document
+            .getElementById("timerLabel")
+            .textContent =
+            "Focus Time";
 
 
-        if (value === "C") {
+        modes[0].classList.add(
+            "active-mode"
+        );
 
-            calcDisplay.value = "";
-
-            return;
-
-        }
+    }
 
 
-        if (value === "DEL") {
+    else if (mode === "short") {
 
-            calcDisplay.value =
-                calcDisplay.value.slice(0, -1);
+        timeLeft = 5 * 60;
 
-            return;
-
-        }
-
-
-        if (value === "=") {
-
-            calculateResult();
-
-            return;
-
-        }
+        document
+            .getElementById("timerLabel")
+            .textContent =
+            "Short Break";
 
 
-        calcDisplay.value += value;
+        modes[1].classList.add(
+            "active-mode"
+        );
 
-    });
+    }
 
-});
 
+    else {
+
+        timeLeft = 15 * 60;
+
+        document
+            .getElementById("timerLabel")
+            .textContent =
+            "Long Break";
+
+
+        modes[2].classList.add(
+            "active-mode"
+        );
+
+    }
+
+
+    updateTimerDisplay();
+
+}
+
+
+/* START TIMER */
+
+function startTimer() {
+
+    if (timerRunning) return;
+
+
+    timerRunning = true;
+
+
+    timer = setInterval(
+        function () {
+
+            if (timeLeft > 0) {
+
+                timeLeft--;
+
+                updateTimerDisplay();
+
+            }
+
+            else {
+
+                timerCompleted();
+
+            }
+
+        },
+        1000
+    );
+
+}
+
+
+/* PAUSE TIMER */
+
+function pauseTimer() {
+
+    clearInterval(timer);
+
+    timerRunning = false;
+
+}
+
+
+/* RESET TIMER */
+
+function resetTimer() {
+
+    pauseTimer();
+
+
+    if (
+        currentMode === "focus"
+    ) {
+
+        timeLeft = 25 * 60;
+
+    }
+
+
+    else if (
+        currentMode === "short"
+    ) {
+
+        timeLeft = 5 * 60;
+
+    }
+
+
+    else {
+
+        timeLeft = 15 * 60;
+
+    }
+
+
+    updateTimerDisplay();
+
+}
+
+
+/* UPDATE TIMER DISPLAY */
+
+function updateTimerDisplay() {
+
+    const minutes =
+        Math.floor(
+            timeLeft / 60
+        );
+
+
+    const seconds =
+        timeLeft % 60;
+
+
+    document
+        .getElementById("timerDisplay")
+        .textContent =
+        String(minutes).padStart(2, "0")
+        +
+        ":"
+        +
+        String(seconds).padStart(2, "0");
+
+}
+
+
+/* TIMER COMPLETED */
+
+function timerCompleted() {
+
+    pauseTimer();
+
+
+    if (
+        currentMode === "focus"
+    ) {
+
+        let sessions =
+            Number(
+                localStorage.getItem(
+                    "saffronySessions"
+                )
+            ) || 0;
+
+
+        sessions++;
+
+
+        localStorage.setItem(
+            "saffronySessions",
+            sessions
+        );
+
+
+        let focusMinutes =
+            Number(
+                localStorage.getItem(
+                    "saffronyFocusMinutes"
+                )
+            ) || 0;
+
+
+        focusMinutes += 25;
+
+
+        localStorage.setItem(
+            "saffronyFocusMinutes",
+            focusMinutes
+        );
+
+
+        document
+            .getElementById(
+                "completedSessions"
+            )
+            .textContent =
+            sessions;
+
+
+        updateDashboard();
+
+
+        showToast(
+            "Focus session completed! 🎉"
+        );
+
+    }
+
+    else {
+
+        showToast(
+            "Break completed!"
+        );
+
+    }
+
+
+    resetTimer();
+
+}
+
+
+/* =====================================================
+   CALCULATOR
+===================================================== */
+
+
+function appendCalc(value) {
+
+    const display =
+        document.getElementById(
+            "calcDisplay"
+        );
+
+
+    display.value += value;
+
+}
+
+
+/* CLEAR */
+
+function clearCalculator() {
+
+    document
+        .getElementById(
+            "calcDisplay"
+        )
+        .value = "";
+
+}
+
+
+/* DELETE LAST */
+
+function deleteLast() {
+
+    const display =
+        document.getElementById(
+            "calcDisplay"
+        );
+
+
+    display.value =
+        display.value.slice(0, -1);
+
+}
+
+
+/* CALCULATE */
 
 function calculateResult() {
+
+    const display =
+        document.getElementById(
+            "calcDisplay"
+        );
+
 
     try {
 
         const expression =
-            calcDisplay.value;
+            display.value;
 
 
         if (!expression) return;
-
-
-        const allowed =
-            /^[0-9+\-*/%.() ]+$/;
-
-
-        if (!allowed.test(expression)) {
-
-            throw new Error();
-
-        }
 
 
         const result =
@@ -675,62 +1426,310 @@ function calculateResult() {
             )();
 
 
-        if (!Number.isFinite(result)) {
+        display.value =
+            result;
 
-            throw new Error();
+    }
+
+    catch (error) {
+
+        display.value =
+            "Error";
+
+
+        setTimeout(function () {
+
+            display.value = "";
+
+        }, 1000);
+
+    }
+
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+
+/* LOAD PROFILE */
+
+function loadProfile() {
+
+    if (!currentUser) {
+
+        const user =
+            localStorage.getItem(
+                "saffronyUser"
+            );
+
+
+        if (user) {
+
+            currentUser =
+                JSON.parse(user);
 
         }
 
+    }
 
-        calcDisplay.value = result;
+
+    if (!currentUser) return;
+
+
+    const nameInput =
+        document.getElementById(
+            "profileName"
+        );
+
+
+    const emailInput =
+        document.getElementById(
+            "profileEmail"
+        );
+
+
+    const branchSelect =
+        document.getElementById(
+            "profileBranch"
+        );
+
+
+    if (nameInput) {
+
+        nameInput.value =
+            currentUser.name;
 
     }
 
-    catch {
 
-        calcDisplay.value = "Error";
+    if (emailInput) {
+
+        emailInput.value =
+            currentUser.email;
+
+    }
+
+
+    if (branchSelect) {
+
+        branchSelect.value =
+            currentUser.branch ||
+            "Computer Science Engineering";
 
     }
 
 }
 
 
-// ===============================
-// DASHBOARD UPDATE
-// ===============================
+/* SAVE PROFILE */
+
+function saveProfile() {
+
+    const name =
+        document
+            .getElementById(
+                "profileName"
+            )
+            .value
+            .trim();
+
+
+    const branch =
+        document
+            .getElementById(
+                "profileBranch"
+            )
+            .value;
+
+
+    if (!name) {
+
+        showToast(
+            "Name cannot be empty!"
+        );
+
+        return;
+
+    }
+
+
+    currentUser.name =
+        name;
+
+
+    currentUser.branch =
+        branch;
+
+
+    localStorage.setItem(
+        "saffronyUser",
+        JSON.stringify(currentUser)
+    );
+
+
+    updateUserUI();
+
+
+    showToast(
+        "Profile updated successfully!"
+    );
+
+}
+
+
+/* =====================================================
+   DASHBOARD STATISTICS
+===================================================== */
+
 
 function updateDashboard() {
 
-    const notesCount = notes.length;
+    const notesCount =
+        document.getElementById(
+            "notesCount"
+        );
 
 
-    const bestScore =
+    if (notesCount) {
+
+        notesCount.textContent =
+            notes.length;
+
+    }
+
+
+    const sessions =
         Number(
-            localStorage.getItem("saffronyQuizScore")
+            localStorage.getItem(
+                "saffronySessions"
+            )
         ) || 0;
 
 
-    document.getElementById("notesCount").textContent =
-        notesCount;
+    const sessionElement =
+        document.getElementById(
+            "studySessions"
+        );
 
 
-    document.getElementById("profileNotes").textContent =
-        notesCount;
+    if (sessionElement) {
+
+        sessionElement.textContent =
+            sessions;
+
+    }
 
 
-    document.getElementById("quizScore").textContent =
-        `${bestScore}/5`;
+    const score =
+        Number(
+            localStorage.getItem(
+                "saffronyQuizScore"
+            )
+        ) || 0;
 
 
-    document.getElementById("profileScore").textContent =
-        bestScore;
+    const scoreElement =
+        document.getElementById(
+            "quizScore"
+        );
+
+
+    if (scoreElement) {
+
+        scoreElement.textContent =
+            score + "%";
+
+    }
+
+
+    const focusMinutes =
+        Number(
+            localStorage.getItem(
+                "saffronyFocusMinutes"
+            )
+        ) || 0;
+
+
+    const focusElement =
+        document.getElementById(
+            "focusMinutes"
+        );
+
+
+    if (focusElement) {
+
+        focusElement.textContent =
+            focusMinutes;
+
+    }
+
+
+    const completed =
+        document.getElementById(
+            "completedSessions"
+        );
+
+
+    if (completed) {
+
+        completed.textContent =
+            sessions;
+
+    }
 
 }
 
 
-// ===============================
-// INITIAL LOAD
-// ===============================
+/* =====================================================
+   TOAST MESSAGE
+===================================================== */
 
-renderNotes();
-updateDashboard();
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    setTimeout(function () {
+
+        toast.classList.remove(
+            "show"
+        );
+
+    }, 3000);
+
+}
+
+
+/* =====================================================
+   SECURITY HELPER
+===================================================== */
+
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement("div");
+
+
+    div.textContent =
+        text;
+
+
+    return div.innerHTML;
+
+}
