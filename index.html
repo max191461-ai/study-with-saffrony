@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Study with Saffrony</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- MOBILE OVERLAY -->
+    <div class="overlay" id="overlay"></div>
+
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div class="brand-text">
+                <h2>Study with</h2>
+                <span>Saffrony</span>
+            </div>
+        </div>
+
+
+        <div class="menu-label">MAIN MENU</div>
+
+        <nav class="nav-menu">
+
+            <button class="nav-item active" data-page="home">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </button>
+
+            <button class="nav-item" data-page="notes">
+                <i class="fa-solid fa-book-open"></i>
+                <span>My Notes</span>
+            </button>
+
+            <button class="nav-item" data-page="quiz">
+                <i class="fa-solid fa-brain"></i>
+                <span>Quiz Zone</span>
+            </button>
+
+            <button class="nav-item" data-page="timetable">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span>Time Table</span>
+            </button>
+
+            <button class="nav-item" data-page="calculator">
+                <i class="fa-solid fa-calculator"></i>
+                <span>Calculator</span>
+            </button>
+
+            <button class="nav-item" data-page="profile">
+                <i class="fa-solid fa-user"></i>
+                <span>My Profile</span>
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="focus-card">
+                <div class="focus-emoji">🔥</div>
+
+                <div>
+                    <h4>Keep Going!</h4>
+                    <p>Small steps every day.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main-content">
+
+        <!-- MOBILE HEADER -->
+        <header class="mobile-header">
+
+            <div class="mobile-brand">
+                🎓 Saffrony
+            </div>
+
+            <button id="menuToggle">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+        </header>
+
+
+        <!-- ================= HOME ================= -->
+        <section class="page active-page" id="home">
+
+            <div class="topbar">
+
+                <div>
+                    <p class="greeting">✨ Welcome back, Learner!</p>
+                    <h1>Make today <span>productive.</span></h1>
+                    <p class="description">
+                        Learn smarter, stay organized and achieve your goals.
+                    </p>
+                </div>
+
+                <div class="top-actions">
+                    <button class="icon-btn">
+                        <i class="fa-solid fa-bell"></i>
+                    </button>
+
+                    <div class="user-avatar">S</div>
+                </div>
+
+            </div>
+
+
+            <!-- HERO BANNER -->
+            <div class="hero-banner">
+
+                <div class="hero-content">
+                    <span class="hero-tag">STAY FOCUSED 🚀</span>
+
+                    <h2>Every expert was once a beginner.</h2>
+
+                    <p>
+                        Your future is created by what you do today.
+                        Keep learning and never stop growing.
+                    </p>
+
+                    <button class="hero-btn" data-go="notes">
+                        Start Learning
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div class="hero-art">
+                    <div class="floating-book">📚</div>
+                    <div class="floating-star star-one">⭐</div>
+                    <div class="floating-star star-two">✨</div>
+                    <div class="student-emoji">👩‍💻</div>
+                </div>
+
+            </div>
+
+
+            <!-- STATS -->
+            <div class="stats-grid">
+
+                <div class="stat-card purple-card">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-note-sticky"></i>
+                    </div>
+
+                    <div>
+                        <p>Total Notes</p>
+                        <h2 id="notesCount">0</h2>
+                        <small>Keep learning!</small>
+                    </div>
+                </div>
+
+
+                <div class="stat-card pink-card">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+
+                    <div>
+                        <p>Best Quiz Score</p>
+                        <h2 id="quizScore">0/5</h2>
+                        <small>Challenge yourself!</small>
+                    </div>
+                </div>
+
+
+                <div class="stat-card blue-card">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+
+                    <div>
+                        <p>Study Time</p>
+                        <h2>12h</h2>
+                        <small>This week</small>
+                    </div>
+                </div>
+
+
+                <div class="stat-card orange-card">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-fire"></i>
+                    </div>
+
+                    <div>
+                        <p>Study Streak</p>
+                        <h2>5 Days</h2>
+                        <small>Keep it alive!</small>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- HOME GRID -->
+            <div class="home-grid">
+
+                <!-- TASKS -->
+                <div class="content-card tasks-card">
+
+                    <div class="card-heading">
+                        <div>
+                            <p class="small-label">YOUR PLAN</p>
+                            <h2>Today's Tasks</h2>
+                        </div>
+
+                        <span class="heading-emoji">📌</span>
+                    </div>
+
+
+                    <div class="task-list">
+
+                        <label class="task-item">
+
+                            <input type="checkbox">
+
+                            <span class="custom-check"></span>
+
+                            <div>
+                                <h4>Complete Mathematics Chapter</h4>
+                                <p>Algebra • 10:00 AM</p>
+                            </div>
+
+                            <span class="task-dot purple-dot"></span>
+
+                        </label>
+
+
+                        <label class="task-item">
+
+                            <input type="checkbox">
+
+                            <span class="custom-check"></span>
+
+                            <div>
+                                <h4>Revise Physics Notes</h4>
+                                <p>Mechanics • 1:00 PM</p>
+                            </div>
+
+                            <span class="task-dot blue-dot"></span>
+
+                        </label>
+
+
+                        <label class="task-item">
+
+                            <input type="checkbox">
+
+                            <span class="custom-check"></span>
+
+                            <div>
+                                <h4>Take Science Quiz</h4>
+                                <p>General Science • 5:00 PM</p>
+                            </div>
+
+                            <span class="task-dot pink-dot"></span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PROGRESS -->
+                <div class="content-card progress-card">
+
+                    <div class="card-heading">
+
+                        <div>
+                            <p class="small-label">THIS WEEK</p>
+                            <h2>Study Progress</h2>
+                        </div>
+
+                        <span class="heading-emoji">📈</span>
+
+                    </div>
+
+
+                    <div class="progress-group">
+
+                        <div class="progress-row">
+                            <div class="progress-info">
+                                <span>Mathematics</span>
+                                <b>80%</b>
+                            </div>
+
+                            <div class="progress-track">
+                                <div class="progress-fill progress-purple"></div>
+                            </div>
+                        </div>
+
+
+                        <div class="progress-row">
+                            <div class="progress-info">
+                                <span>Science</span>
+                                <b>65%</b>
+                            </div>
+
+                            <div class="progress-track">
+                                <div class="progress-fill progress-blue"></div>
+                            </div>
+                        </div>
+
+
+                        <div class="progress-row">
+                            <div class="progress-info">
+                                <span>English</span>
+                                <b>90%</b>
+                            </div>
+
+                            <div class="progress-track">
+                                <div class="progress-fill progress-pink"></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUOTE -->
+            <div class="quote-card">
+
+                <div class="quote-icon">💡</div>
+
+                <div>
+                    <p class="small-label">DAILY MOTIVATION</p>
+                    <h3>"Success is the sum of small efforts repeated day in and day out."</h3>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= NOTES ================= -->
+        <section class="page" id="notes">
+
+            <div class="page-title-row">
+
+                <div>
+                    <p class="greeting">📚 ORGANIZE YOUR KNOWLEDGE</p>
+                    <h1>My <span>Notes</span></h1>
+                    <p class="description">
+                        Save your important study notes in one place.
+                    </p>
+                </div>
+
+                <button class="primary-btn" id="openNoteModal">
+                    <i class="fa-solid fa-plus"></i>
+                    Add New Note
+                </button>
+
+            </div>
+
+
+            <div class="notes-grid" id="notesContainer">
+                <!-- Notes added using JavaScript -->
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= QUIZ ================= -->
+        <section class="page" id="quiz">
+
+            <div class="page-title-row">
+
+                <div>
+                    <p class="greeting">🧠 TEST YOUR KNOWLEDGE</p>
+                    <h1>Quiz <span>Zone</span></h1>
+                    <p class="description">
+                        Challenge yourself with quick questions.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="quiz-wrapper">
+
+                <!-- QUIZ START -->
+                <div class="quiz-screen" id="quizStart">
+
+                    <div class="quiz-big-icon">🧠</div>
+
+                    <h2>Ready to Challenge Yourself?</h2>
+
+                    <p>
+                        Answer 5 questions and see how much you know!
+                    </p>
+
+                    <div class="quiz-features">
+
+                        <span>⚡ Quick</span>
+                        <span>🎯 Fun</span>
+                        <span>🏆 Score</span>
+
+                    </div>
+
+                    <button class="primary-btn quiz-start-btn" id="startQuiz">
+                        Start Quiz
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+
+                </div>
+
+
+                <!-- QUIZ QUESTIONS -->
+                <div class="quiz-screen hidden" id="quizBox">
+
+                    <div class="quiz-top">
+
+                        <span id="questionNumber">Question 1 of 5</span>
+
+                        <span class="score-live">
+                            Score: <b id="liveScore">0</b>
+                        </span>
+
+                    </div>
+
+                    <div class="quiz-progress">
+                        <div id="quizProgressFill"></div>
+                    </div>
+
+                    <h2 id="questionText"></h2>
+
+                    <div id="answerButtons" class="answers-grid"></div>
+
+                    <button class="primary-btn hidden" id="nextQuestion">
+                        Next Question
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                </div>
+
+
+                <!-- RESULT -->
+                <div class="quiz-screen hidden" id="quizResult">
+
+                    <div class="result-trophy">🏆</div>
+
+                    <p class="small-label">QUIZ COMPLETED</p>
+
+                    <h2>Amazing Work!</h2>
+
+                    <div class="result-score" id="finalScore">
+                        0/5
+                    </div>
+
+                    <p id="resultMessage"></p>
+
+                    <button class="primary-btn quiz-start-btn" id="restartQuiz">
+                        Try Again
+                        <i class="fa-solid fa-rotate-right"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= TIMETABLE ================= -->
+        <section class="page" id="timetable">
+
+            <div class="page-title-row">
+
+                <div>
+                    <p class="greeting">📅 PLAN YOUR WEEK</p>
+                    <h1>Time <span>Table</span></h1>
+                    <p class="description">
+                        Stay organized and manage your study schedule.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="timetable-wrapper">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+
+                        <tr>
+                            <td class="time-cell">9:00 AM</td>
+                            <td><span class="subject math">Mathematics</span></td>
+                            <td><span class="subject physics">Physics</span></td>
+                            <td><span class="subject english">English</span></td>
+                            <td><span class="subject math">Mathematics</span></td>
+                            <td><span class="subject chemistry">Chemistry</span></td>
+                        </tr>
+
+                        <tr>
+                            <td class="time-cell">11:00 AM</td>
+                            <td><span class="subject physics">Physics</span></td>
+                            <td><span class="subject english">English</span></td>
+                            <td><span class="subject math">Mathematics</span></td>
+                            <td><span class="subject biology">Biology</span></td>
+                            <td><span class="subject english">English</span></td>
+                        </tr>
+
+                        <tr>
+                            <td class="time-cell">1:00 PM</td>
+                            <td><span class="subject break">Lunch Break</span></td>
+                            <td><span class="subject break">Lunch Break</span></td>
+                            <td><span class="subject break">Lunch Break</span></td>
+                            <td><span class="subject break">Lunch Break</span></td>
+                            <td><span class="subject break">Lunch Break</span></td>
+                        </tr>
+
+                        <tr>
+                            <td class="time-cell">3:00 PM</td>
+                            <td><span class="subject english">English</span></td>
+                            <td><span class="subject math">Mathematics</span></td>
+                            <td><span class="subject chemistry">Chemistry</span></td>
+                            <td><span class="subject english">English</span></td>
+                            <td><span class="subject revision">Revision</span></td>
+                        </tr>
+
+                        <tr>
+                            <td class="time-cell">5:00 PM</td>
+                            <td><span class="subject revision">Revision</span></td>
+                            <td><span class="subject quiz-subject">Quiz</span></td>
+                            <td><span class="subject revision">Revision</span></td>
+                            <td><span class="subject quiz-subject">Quiz</span></td>
+                            <td><span class="subject test">Weekly Test</span></td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= CALCULATOR ================= -->
+        <section class="page" id="calculator">
+
+            <div class="page-title-row">
+
+                <div>
+                    <p class="greeting">🧮 QUICK MATH TOOL</p>
+                    <h1>Smart <span>Calculator</span></h1>
+                    <p class="description">
+                        Solve your calculations quickly and easily.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="calculator-area">
+
+                <div class="calculator-card">
+
+                    <div class="calc-header">
+                        <span>SAFFRONY CALC</span>
+                        <span>●</span>
+                    </div>
+
+                    <input type="text" id="calcDisplay" placeholder="0" readonly>
+
+
+                    <div class="calculator-buttons">
+
+                        <button class="calc-btn clear" data-value="C">C</button>
+                        <button class="calc-btn operator" data-value="DEL">⌫</button>
+                        <button class="calc-btn operator" data-value="%">%</button>
+                        <button class="calc-btn operator" data-value="/">÷</button>
+
+                        <button class="calc-btn" data-value="7">7</button>
+                        <button class="calc-btn" data-value="8">8</button>
+                        <button class="calc-btn" data-value="9">9</button>
+                        <button class="calc-btn operator" data-value="*">×</button>
+
+                        <button class="calc-btn" data-value="4">4</button>
+                        <button class="calc-btn" data-value="5">5</button>
+                        <button class="calc-btn" data-value="6">6</button>
+                        <button class="calc-btn operator" data-value="-">−</button>
+
+                        <button class="calc-btn" data-value="1">1</button>
+                        <button class="calc-btn" data-value="2">2</button>
+                        <button class="calc-btn" data-value="3">3</button>
+                        <button class="calc-btn operator" data-value="+">+</button>
+
+                        <button class="calc-btn zero" data-value="0">0</button>
+                        <button class="calc-btn" data-value=".">.</button>
+                        <button class="calc-btn equal" data-value="=">=</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= PROFILE ================= -->
+        <section class="page" id="profile">
+
+            <div class="page-title-row">
+
+                <div>
+                    <p class="greeting">👤 YOUR LEARNING SPACE</p>
+                    <h1>My <span>Profile</span></h1>
+                    <p class="description">
+                        Track your learning journey and achievements.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="profile-layout">
+
+                <div class="profile-main-card">
+
+                    <div class="profile-cover"></div>
+
+                    <div class="profile-content">
+
+                        <div class="profile-avatar">S</div>
+
+                        <h2 id="profileName">Saffrony Student</h2>
+
+                        <p class="profile-email">
+                            student@saffrony.com
+                        </p>
+
+                        <span class="learner-badge">
+                            ✨ Active Learner
+                        </span>
+
+
+                        <div class="profile-stats">
+
+                            <div>
+                                <h3 id="profileNotes">0</h3>
+                                <p>Notes</p>
+                            </div>
+
+                            <div>
+                                <h3 id="profileScore">0</h3>
+                                <p>Best Score</p>
+                            </div>
+
+                            <div>
+                                <h3>5</h3>
+                                <p>Day Streak</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="achievement-card">
+
+                    <p class="small-label">ACHIEVEMENTS</p>
+
+                    <h2>Your Learning Journey 🏅</h2>
+
+                    <div class="achievement-list">
+
+                        <div class="achievement">
+                            <span class="achievement-icon purple-achieve">📚</span>
+
+                            <div>
+                                <h4>Knowledge Builder</h4>
+                                <p>Create your first note</p>
+                            </div>
+                        </div>
+
+
+                        <div class="achievement">
+                            <span class="achievement-icon pink-achieve">🧠</span>
+
+                            <div>
+                                <h4>Quiz Master</h4>
+                                <p>Score high in a quiz</p>
+                            </div>
+                        </div>
+
+
+                        <div class="achievement">
+                            <span class="achievement-icon orange-achieve">🔥</span>
+
+                            <div>
+                                <h4>Consistency Hero</h4>
+                                <p>Maintain your study streak</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ADD NOTE MODAL -->
+    <div class="modal" id="noteModal">
+
+        <div class="modal-box">
+
+            <div class="modal-header">
+                <div>
+                    <p class="small-label">CREATE NOTE</p>
+                    <h2>New Study Note</h2>
+                </div>
+
+                <button id="closeNoteModal">×</button>
+            </div>
+
+
+            <div class="form-group">
+                <label>Note Title</label>
+
+                <input
+                    type="text"
+                    id="noteTitle"
+                    placeholder="Example: Newton's Laws"
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label>Subject</label>
+
+                <select id="noteSubject">
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Science">Science</option>
+                    <option value="Physics">Physics</option>
+                    <option value="Chemistry">Chemistry</option>
+                    <option value="English">English</option>
+                    <option value="General">General</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label>Your Notes</label>
+
+                <textarea
+                    id="noteContent"
+                    placeholder="Write something important..."
+                ></textarea>
+            </div>
+
+
+            <button class="primary-btn full-btn" id="saveNote">
+                <i class="fa-solid fa-floppy-disk"></i>
+                Save Note
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
